@@ -1,52 +1,28 @@
-# Prerequisites
-*.d
+#include <stdio.h>
+#include <stdlib.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+int main()
+{
+    FILE *fp = NULL;
+    int len = 0, i = 0;
 
-# Linker output
-*.ilk
-*.map
-*.exp
+    fp = fopen("reverseChallenge.txt" , "r");
 
-# Precompiled Headers
-*.gch
-*.pch
+    if(fp == NULL)
+        return -1;
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+    fseek(fp , 0 , SEEK_END);
+    len = ftell(fp);
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+    while(i < len)
+    {
+        i++;
+        fseek(fp , -i , SEEK_END);
+        printf("%c" , fgetc(fp));
+    }
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+    fclose(fp);
+    fp = NULL;
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+    return 0;
+}
